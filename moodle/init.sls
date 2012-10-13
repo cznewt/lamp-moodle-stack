@@ -31,7 +31,7 @@ git://git.moodle.org/moodle.git:
         - template: jinja
         - mode: 644
         - require:
-            - file: /srv/app/moodle-{{ pillar['moodle-version'] }}/sites/{{ app.name }}/root/
+            - git: git://git.moodle.org/moodle.git
         - defaults:
             database_engine: "{{ app['config']['database']['engine'] }}"
             database_host: "{{ app['config']['database']['host'] }}"
