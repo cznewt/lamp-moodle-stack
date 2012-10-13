@@ -8,5 +8,5 @@ php-packages:
             - php5-curl
             - php5-intl
             - php5-xmlrpc
-            - php5-mbstring
+{#            - php5-mbstring #}
             - php5-mcrypt
