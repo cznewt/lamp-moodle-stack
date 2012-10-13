@@ -6,4 +6,4 @@
         - group: root
         - template: jinja
         - defaults:
-            salt_master: pillar['salt-master']
+            salt_master: {{ pillar['salt-master'] }}
