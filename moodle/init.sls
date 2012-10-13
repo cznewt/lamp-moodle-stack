@@ -22,6 +22,7 @@ include:
 
 git://git.moodle.org/moodle.git:
   git.latest:
+    - rev: MOODLE_{{ pillar['moodle-version']|replace(".", "") }}_STABLE
     - target: /srv/app/moodle-{{ pillar['moodle-version'] }}/sites/{{ app.name }}/root
 
 /srv/app/moodle-{{ pillar['moodle-version'] }}/sites/{{ app.name }}/root/config.php:
