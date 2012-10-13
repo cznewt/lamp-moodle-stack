@@ -9,7 +9,6 @@ mysql-server-{{ pillar['mysql-version'] }}:
   service.running:
    - name: mysql
    - watch:
-     - pkg: python-mysqldb
      - file: /etc/mysql/my.cnf
 
 {%- for db in pillar['mysql-databases'] %}
