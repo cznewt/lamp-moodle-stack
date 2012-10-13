@@ -9,7 +9,7 @@ salt-master:
     - managed
     - source: salt://salt/etc/salt/master
     - require:
-      - pkg: salt
+      - pkg: salt-master
 
 /opt/salt/pillar:
   file.directory:
