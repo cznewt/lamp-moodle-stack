@@ -4,7 +4,7 @@ unset($CFG);
 global $CFG;
 $CFG = new stdClass();
 
-$CFG->dbtype    = '{%- if database_engine == "mysql" %}mysql{% else %}pgsql{%- endif %}';
+$CFG->dbtype    = '{%- if database_engine == "mysql" %}mysqli{%- endif %}{%- if database_engine == "pgsql" %}pgsql{%- endif %}';
 $CFG->dblibrary = 'native';
 $CFG->dbhost    = '{{ database_host }}';
 $CFG->dbname    = '{{ database_name }}';
