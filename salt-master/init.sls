@@ -8,8 +8,6 @@ salt-master:
   file:
     - managed
     - source: salt://salt/etc/salt/master
-    - require:
-      - pkg: salt-master
 
 /opt/salt/pillar:
   file.directory:
