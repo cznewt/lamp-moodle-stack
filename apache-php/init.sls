@@ -18,6 +18,7 @@ apache2-php-packages:
         - source: salt://apache-php/etc/apache2/sites/{{ host['app-env'] }}.vhost
         - template: jinja
         - mode: 644
+        - makedirs: true
         - defaults:
             config_name: "{{ host['config-name'] }}"
             app_name: "{{ host['app-name'] }}"
