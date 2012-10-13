@@ -1,8 +1,5 @@
 <VirtualHost *:80>
 	ServerName {{ host_name }}
-	{%- if host_alias %}
-	ServerAlias {{ host_alias }}
-	{%- endif %}
 
 	DocumentRoot /srv/app/{{ app_env }}/sites/{{ app_name }}/root
 
