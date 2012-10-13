@@ -10,6 +10,12 @@ apache2-php-packages:
         - names:
             - libapache2-mod-php5
 
+a2enmod rewrite:
+    cmd:
+        - run
+        - require:
+            - service: apache2
+
 {%- if pillar['apache-php-hosts'] %}
 {%- for host in pillar['apache-php-hosts'] %}
 /etc/apache2/sites-enabled/{{ host['config-name'] }}:
