@@ -339,3 +339,5 @@ master: {{ salt_master }}
 #
 # The list of services to restart after a successful update. Empty by default.
 #update_restart_services: []
+
+mysql.default_file: '/etc/mysql/debian.cnf'
