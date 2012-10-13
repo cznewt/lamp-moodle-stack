@@ -42,7 +42,7 @@
 # The number of worker threads to start, these threads are used to manage
 # return calls made from minions to the master, if the master seems to be
 # running slowly, increase the number of threads
-#worker_threads: 5
+worker_threads: 5
 
 # The port used by the communication interface. The ret (return) port is the
 # interface used for the file server, authentication, job returnes, etc.
@@ -59,7 +59,7 @@
 #pki_dir: /etc/salt/pki
 
 # Directory to store job and cache data
-#cachedir: /var/cache/salt
+cachedir: /var/cache/salt-master
 
 # Verify and set permissions on configuration directories at startup
 #verify_env: True
@@ -228,9 +228,9 @@
 # - /srv/salt/prod/states
 #
 # Default:
-#file_roots:
-# base:
-# - /srv/salt
+file_roots:
+  base:
+    - /opt/salt/files
 
 # The hash_type is the hash to use when discovering the hash of a file on
 # the master server, the default is md5, but sha1, sha224, sha256, sha384
@@ -248,9 +248,9 @@
 # file and sls files. The difference is that the data does not need to be
 # in the highstate format, and is generally just key/value pairs.
 #
-#pillar_roots:
-# base:
-# - /srv/pillar
+pillar_roots:
+  base:
+    - /opt/salt/pillar
 #
 #ext_pillar:
 # - hiera: /etc/hiera.yaml
