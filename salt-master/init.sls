@@ -7,7 +7,7 @@ salt-master:
 /etc/salt/master:
   file:
     - managed
-    - source: salt://salt/etc/salt/master
+    - source: salt://salt-master/etc/salt/master
 
 /opt/salt/pillar:
   file.directory:
