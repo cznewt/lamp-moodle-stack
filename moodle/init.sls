@@ -20,13 +20,9 @@ include:
         - mode: 777
         - makedirs: true
 
-/srv/app/moodle-{{ pillar['moodle-version'] }}/sites/{{ app.name }}/root/:
-    file:
-        - directory
-        - user: root
-        - group: root
-        - mode: 755
-        - makedirs: true
+git://git.moodle.org/moodle.git:
+  git.latest:
+    - target: /srv/app/moodle-{{ pillar['moodle-version'] }}/sites/{{ app.name }}/root
 
 /srv/app/moodle-{{ pillar['moodle-version'] }}/sites/{{ app.name }}/root/config.php:
     file:
