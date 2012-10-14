@@ -17,6 +17,7 @@ mysql-server-{{ pillar['mysql-version'] }}:
      - file: /etc/mysql/my.cnf
 
 {%- for db in pillar['mysql-databases'] %}
+{#
 {{ db.database }}_database:
   mysql_database.present:
     - name: {{ db.database }}
@@ -30,9 +31,22 @@ mysql-server-{{ pillar['mysql-version'] }}:
   require:
     - pkg: python-mysqldb
     - service: mysql
-{{ db.database }}_database_utf8:
+#}
+{{ db.database }}_database_create:
+  module.run:
+  - name: mysql.query
+  - database: {{ db.database }}
+  - query: "CREATE DATABASE IF NOT EXISTS {{ db.database }} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
+
+{{ db.database }}_database_unicode:
   module.run:
   - name: mysql.query
   - database: {{ db.database }}
   - query: "ALTER DATABASE {{ db.database }} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
+
+{{ db.database }}_database_grants:
+  module.run:
+  - name: mysql.query
+  - database: {{ db.database }}
+  - query: "GRANT ALL PRIVILEGES ON {{ db.database }}.* TO {{ db.user }} @'%' IDENTIFIED BY '{{ db.password }}';"
 {%- endfor %}
