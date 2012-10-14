@@ -12,7 +12,7 @@ python-mysqldb:
             - pkg: mysql-server-{{ pillar['mysql-version'] }}
         - defaults:
             mysql_replication: {{ pillar['mysql-replication'] }}
-            mysql_host_ip = {{ pillar['mysql-bind-ip'] }}
+            mysql_host_ip: {{ pillar['mysql-bind-ip'] }}
 
 mysql-server-{{ pillar['mysql-version'] }}:
   pkg:
