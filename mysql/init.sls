@@ -22,6 +22,7 @@ mysql-server-{{ pillar['mysql-version'] }}:
     - name: {{ db.database }}
   mysql_user.present:
     - name: {{ db.user }}
+    - host: '%'
     - password: "{{ db.password }}"
   mysql_grants.present:
     - database: {{ db.database }}.*
@@ -42,8 +43,6 @@ mysql-server-{{ pillar['mysql-version'] }}:
   - name: mysql.query
   - database: {{ db.database }}
   - query: "CREATE DATABASE IF NOT EXISTS {{ db.database }} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
-
-
 {{ db.database }}_database_grants:
   module.run:
   - name: mysql.query
