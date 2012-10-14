@@ -3,9 +3,16 @@ python-mysqldb:
         - installed
 
 /etc/mysql/my.cnf:
-  file.managed:
-    - source: salt://mysql/etc/mysql/my.cnf
-    - mode: 644
+    file:
+        - managed
+        - source: salt://mysql/etc/mysql/my.cnf
+        - template: jinja
+        - mode: 644
+        - require:
+            - pkg: mysql-server-{{ pillar['mysql-version'] }}
+        - defaults:
+            mysql_replication: {{ pillar['mysql-replication'] }}
+            mysql_host_ip = {{ pillar['mysql-bind-ip'] }}
 
 mysql-server-{{ pillar['mysql-version'] }}:
   pkg:
