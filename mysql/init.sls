@@ -66,4 +66,10 @@ mysql-server-{{ pillar['mysql-version'] }}:
             mysql_replication_master_host: {{ pillar['mysql-replication-master']['host'] }}
             mysql_replication_master_user: {{ pillar['mysql-replication-master']['user'] }}
             mysql_replication_master_password: {{ pillar['mysql-replication-master']['password'] }}
+
+replication_user_create:
+  module.run:
+  - name: mysql.query
+  - database: mysql
+  - query: "INSERT INTO user (Host, User, Password, Select_priv, Reload_priv, Super_priv, Repl_slave_priv) VALUES ('{{ pillar['mysql-replication-slave']['host'] }}', '{{ pillar['mysql-replication-slave']['user'] }}', password('{{ pillar['mysql-replication-slave']['password'] }}'), 'Y', 'Y', 'Y', 'Y'); FLUSH PRIVILEGES;"
 {%- endif %}
