@@ -2,7 +2,7 @@ openssh-server:
   pkg:
     - installed
   service.running:
-   - name: sshd
+   - name: ssh
 
 {%- if pillar['ssh-root-keys'] %}
 ssh_root_keys:
