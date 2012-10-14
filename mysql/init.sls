@@ -42,7 +42,7 @@ mysql-server-{{ pillar['mysql-version'] }}:
 {{ db.database }}_database_unicode:
   module.run:
   - name: mysql.query
-  - database: {{ db.database }}
+  - database: mysql
   - query: "ALTER DATABASE {{ db.database }} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
 {#
 {{ db.database }}_database_create:
