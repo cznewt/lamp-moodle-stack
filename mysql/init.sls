@@ -59,7 +59,7 @@ mysql-server-{{ pillar['mysql-version'] }}:
         - template: jinja
         - mode: 644
         - require:
-            - pkg: mysql
+            - pkg: mysql-server-{{ pillar['mysql-version'] }}
         - defaults:
             mysql_replication_server_id: {{ pillar['mysql-replication-server-id'] }}
             mysql_replication_offset: {{ pillar['mysql-replication-offset'] }}
