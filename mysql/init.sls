@@ -17,17 +17,27 @@ mysql-server-{{ pillar['mysql-version'] }}:
      - file: /etc/mysql/my.cnf
 
 {%- for db in pillar['mysql-databases'] %}
-{{ db.database }}:
-    mysql_database.present
+{{ db.database }}_database:
+  mysql_database:
+    - present
+    - name: {{ db.database }}
+    - require:
+      - service: mysql
 
-{{ db.user }}:
-  mysql_user.present:
-    - host: localhost
-    - password: {{ db.password }}
+{{ db.user }}_user:
+  mysql_user:
+    - present:
+    - name: {{ db.user }}
+    - password_hash: {{ db.password }}
+    - require:
+      - mysql_database.present: {{ db.database }}_database
 
-{{ db.user }}_{{ db.database }}:
-  mysql_grants.present:
+{{ db.database }}_grants:
+  mysql_grants:
+    - present
     - grant: all privileges
     - database: {{ db.database }}
     - user: {{ db.user }}
+    - require:
+      - mysql_user.present: {{ db.user }}_user
 {%- endfor %}
