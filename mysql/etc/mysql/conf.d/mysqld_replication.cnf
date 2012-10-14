@@ -2,6 +2,8 @@
 # * Replication
 #
 
+[mysqld]
+
 server-id = {{ mysql_replication_server_id }}
 replicate-same-server-id = 0
 auto-increment-increment = 2
