@@ -30,4 +30,6 @@ mysql-server-{{ pillar['mysql-version'] }}:
   require:
     - pkg: python-mysqldb
     - service: mysql
+mysql.query {{ db.database }} "ALTER DATABASE {{ db.database }} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;":
+  - module.run
 {%- endfor %}
