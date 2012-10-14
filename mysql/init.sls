@@ -26,7 +26,7 @@ mysql-server-{{ pillar['mysql-version'] }}:
 
 {{ db.user }}_user:
   mysql_user:
-    - present:
+    - present
     - name: {{ db.user }}
     - password_hash: {{ db.password }}
     - require:
