@@ -32,12 +32,12 @@ mysql-server-{{ pillar['mysql-version'] }}:
     - require:
       - mysql_database.present: {{ db.database }}_database
 
-{{ db.database }}_grants:
+{{ db.database }}_privileges:
   mysql_grants:
     - present
     - grant: all privileges
     - database: {{ db.database }}
     - user: {{ db.user }}
-    - require:
-      - mysql_user.present: {{ db.user }}_user
+{#    - require:
+      - mysql_user.present: {{ db.user }}_user #}
 {%- endfor %}
