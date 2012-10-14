@@ -1,0 +1,15 @@
+server-id               = {{ mysql_replication_server_id }}
+replicate-same-server-id = 0
+auto-increment-increment = 2
+auto-increment-offset   = {{ mysql_replication_offset }}
+
+master-host             = {{ mysql_replication_master_host }}
+master-user             = {{ mysql_replication_master_user }}
+master-password         = {{ mysql_replication_master_password }}
+master-connect-retry    = 60
+
+log_bin                 = /var/log/mysql/mysql-bin.log
+expire_logs_days        = 10
+max_binlog_size         = 100M
+#binlog_do_db           = include_database_name
+#binlog_ignore_db       = include_database_name

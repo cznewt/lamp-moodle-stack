@@ -50,3 +50,20 @@ mysql-server-{{ pillar['mysql-version'] }}:
   - query: "GRANT ALL PRIVILEGES ON {{ db.database }}.* TO {{ db.user }} @'%' IDENTIFIED BY '{{ db.password }}';"
 #}
 {%- endfor %}
+
+{%- if pillar['mysql-replication'] %}
+/etc/mysql/conf.d/mysqld_replication.cnf:
+    file:
+        - managed
+        - source: salt://mysql/etc/mysql/conf.d/mysqld_replication.cnf
+        - template: jinja
+        - mode: 644
+        - require:
+            - pkg: mysql
+        - defaults:
+            mysql_replication_server_id: {{ pillar['mysql-replication-server-id'] }}
+            mysql_replication_offset: {{ pillar['mysql-replication-offset'] }}
+            mysql_replication_master_host: {{ pillar['mysql-replication-master']['host'] }}
+            mysql_replication_master_user: {{ pillar['mysql-replication-master']['user'] }}
+            mysql_replication_master_password: {{ pillar['mysql-replication-master']['password'] }}
+{%- endif %}
