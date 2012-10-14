@@ -32,6 +32,7 @@ mysql-server-{{ pillar['mysql-version'] }}:
     - service: mysql
 {{ db.database }}_database_utf8:
   module.run:
-  - name: mysql.query {{ db.database }} "ALTER DATABASE {{ db.database }} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
-#}
+  - name: mysql.query
+  - database: {{ db.database }}
+  - query: "ALTER DATABASE {{ db.database }} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
 {%- endfor %}
