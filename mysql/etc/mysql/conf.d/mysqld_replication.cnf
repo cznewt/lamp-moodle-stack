@@ -9,18 +9,6 @@ replicate-same-server-id = 0
 auto-increment-increment = 2
 auto-increment-offset = {{ mysql_replication_offset }}
 
-{#
-master-host = {{ mysql_replication_master_host }}
-master-user = {{ mysql_replication_master_user }}
-master-password = {{ mysql_replication_master_password }}
-master-connect-retry = 60
-
-relay-log = /var/lib/mysql/slave-relay.log
-relay-log-index = /var/lib/mysql/slave-relay-log.index
-
-slave-skip-errors=1061,1062
-#}
-
 log_bin = /var/log/mysql/mysql-bin.log
 log_bin_index = /var/log/mysql/bin-log.index
 sync_binlog = 1 #increases reliability, but decreases performance

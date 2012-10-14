@@ -79,4 +79,10 @@ replication_user_create:
   - name: mysql.query
   - database: mysql
   - query: "INSERT INTO user (Host, User, Password, Select_priv, Reload_priv, Super_priv, Repl_slave_priv) VALUES ('{{ pillar['mysql-replication-slave']['host'] }}', '{{ pillar['mysql-replication-slave']['user'] }}', password('{{ pillar['mysql-replication-slave']['password'] }}'), 'Y', 'Y', 'Y', 'Y'); FLUSH PRIVILEGES;"
+
+replication_refresh:
+  module.run:
+  - name: mysql.query
+  - database: mysql
+  - query: "stop slave; CHANGE MASTER TO MASTER_HOST='{{ pillar['mysql-replication-master']['host'] }}', MASTER_USER='{{ pillar['mysql-replication-master']['user'] }}', MASTER_PASSWORD='{{ pillar['mysql-replication-master']['password'] }}'; start slave;"
 {%- endif %}
